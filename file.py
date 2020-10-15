@@ -22,6 +22,9 @@ basket_sets = basket.applymap(encode_units)
 basket_sets.drop('POSTAGE', inplace= True, axis= 1)
 basket_sets
 
+frequent_itemsets = apriori(basket_sets, min_support= 0.07, use_colnames= True)
+rules = association_rules(frequent_itemsets, metric= "lift", min_threshold= 1)
+rules.head()
 
 
 rules[(rules['lift']>=6) &
